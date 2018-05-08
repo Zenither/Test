@@ -1,0 +1,511 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>Easy英语</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+	<style>
+        html,body{min-height: 100%;}
+        body{
+            background-color: #eee;
+        }
+		.swipe {
+          overflow: hidden;
+          visibility: hidden;
+          position: relative;
+        }
+        .swipe-wrap {
+          overflow: hidden;
+          position: relative;
+        }
+        .swipe-wrap > div {
+          float:left;
+          width:100%;
+          position: relative;
+        }
+        .swipe-wrap > div img{
+            width: 100%; display: block;
+        }
+        #slide{
+            border-bottom: 1px solid #dedede; background-color: #fff;
+        }
+        #slide label{
+            display: block; color: #4b4b4b; width: 100%;
+            padding: 10px; font-size: 14px;
+            white-space: nowrap; overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        #slide .pointer{
+            position: absolute; bottom: 0; left: 0; width: 12.5%;
+            height: 2px; background-color: #e13430;
+            -webkit-transition: all .2s;
+            transition:all .2s;
+        }
+        section{
+            margin-top: 8px; border-top: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+            background-color: #fff;
+        }
+        .content{
+            padding: 0 10px 15px;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: flex;
+        }
+        .content li{
+            padding-right: 10px;
+            -webkit-box-flex: 1;
+            -webkit-flex: 1;
+            flex: 1;
+        }
+        .content li:last-child{
+            padding-right: 0;
+        }
+        .content li img{
+            width: 100%;
+        }
+        .content li label{
+            font-size: 14px; height: 3em; overflow: hidden;
+            margin-top: 4px; color: #626262; line-height: 1.5;
+        }
+        section header{
+            padding-top: 15px; overflow: hidden; padding-bottom: 10px;
+        }
+        section header span{
+            float: left; font-size: 16px; border-left: 4px solid #f43530;
+            margin-left: 10px; padding-left: 10px;
+        }
+        section header em{
+            float: right; font-size: 14px; color: #e13733; margin-right: 10px;
+        }
+	</style>
+</head>
+<body>
+<div id='slide' class='swipe'>
+    <div class='swipe-wrap'>
+        <div onclick='openWin1()'>
+            <img src="../image/slide/slide1.jpg" />
+            <label>趁年轻，去奋斗吧！</label>
+        </div>
+        <div  onclick='openWiner()'>
+            <img src="../image/slide/slide2.jpg" />
+            <label>20多岁时，千万不能太闲</label>
+        </div>
+        <div  onclick='openWinman()'>
+            <img src="../image/slide/slide3.jpg" />
+            <label>人生，是条逆流的大河</label>
+        </div>
+        <div  onclick='openWinren()'>
+            <img src="../image/slide/slide4.jpg" />
+            <label>人生如诗</label>
+        </div>
+        <div  onclick='openWinqin()'>
+            <img src="../image/slide/slide.jpg" />
+            <label>青春</label>
+        </div>
+        <div  onclick='openWinyi()'>
+            <img src="../image/slide/slide6.jpg" />
+            <label>一棵开花的树</label>
+        </div>
+        <div  onclick='openWinzuo()'>
+            <img src="../image/slide/slide5.jpg" />
+            <label>做最好的自己</label>
+        </div>
+        <div  onclick='openWinzou()'>
+            <img src="../image/slide/slide7.jpg" />
+            <label>走自己的路，让别人说去吧</label>
+        </div>
+    </div>
+    <em class="pointer"></em>
+</div>
+<section>
+    <header>
+        <span>词汇</span><em onclick="testword()">词汇量测试&gt;</em>
+    </header>
+    <ul class="content">
+        <li>
+            <div onclick="openw1()" tapmode="">
+                <img src="../image/pic/news_p1.jpg" />
+            </div>
+            <label>3000常用词汇</label>
+        </li>
+        <li>
+            <div onclick="openw2()" tapmode="">
+                <img src="../image/pic/news_p1.jpg" />
+            </div>
+            <label>3000常用词汇</label>
+        </li>
+        <li>
+            <div onclick="openw3()" tapmode="">
+                <img src="../image/pic/news_p1.jpg" />
+            </div>
+            <label>3000常用词汇</label>
+        </li>
+    </ul>
+</section>
+<section>
+    <header>
+        <span>听力</span><em>更多&gt;</em>
+    </header>
+    <!-- <ul class="content" onclick="openlist()" tapmode=""> -->
+      <ul class="content" >
+        <li>
+            <div onclick="openlistfour()" tapmode="">
+                <img src="../image/pic/1.jpg" />
+            </div>
+            <label>四级听力</label>
+        </li>
+        <li>
+            <div onclick="openlistsix()" tapmode="">
+                <img src="../image/pic/2.jpg" />
+            </div>
+            <label>六级听力</label>
+        </li>
+        <li>
+            <div onclick="openlist()" tapmode="">
+                <img src="../image/pic/3.jpg" />
+            </div>
+            <label>常速VOA</label>
+        </li>
+    </ul>
+</section>
+<section>
+    <header>
+        <span>名著</span><em onclick="more()" tapmode=''>更多&gt;</em>
+    </header>
+    <ul class="content">
+        <li>
+            <div onclick="openNew()" tapmode=''>
+                <img src="../image/pic/ja.jpg" />
+            </div>
+            <label>Jane Eyre</label>
+        </li>
+        <li>
+            <div onclick="openNewo()" tapmode=''>
+                <img src="../image/pic/gww.jpg" />
+            </div>
+            <label>Gone With The  Wind</label>
+        </li>
+        <li>
+            <div onclick="openNewt()" tapmode=''>
+                <img src="../image/pic/tsm.jpg" />
+            </div>
+            <label>The Old Man And  The Sea</label>
+        </li>
+    </ul>
+</section>
+<section>
+    <header>
+        <span>翻译</span><em>更多&gt;</em>
+    </header>
+    <ul class="content">
+        <li>
+            <div>
+                <img src="../image/pic/f1.jpg" />
+            </div>
+            <label>翻译1</label>
+        </li>
+        <li>
+            <div>
+                <img src="../image/pic/f2.jpg" />
+            </div>
+            <label>翻译2</label>
+        </li>
+        <li>
+            <div>
+                <img src="../image/pic/f3.jpg" />
+            </div>
+            <label>翻译3</label>
+        </li>
+    </ul>
+</section>
+<section>
+    <header>
+        <span>职场</span><em>更多&gt;</em>
+    </header>
+    <ul class="content">
+        <li>
+            <div>
+                <img src="../image/pic/beijing_p1.jpg" />
+            </div>
+            <label>英语口语</label>
+        </li>
+        <li>
+            <div>
+                <img src="../image/pic/beijing_p2.jpg" />
+            </div>
+            <label>商务写作</label>
+        </li>
+        <li>
+            <div>
+                <img src="../image/pic/beijing_p3.jpg" />
+            </div>
+            <label>职场文化</label>
+        </li>
+    </ul>
+</section>
+<section>
+    <header>
+        <span>考研</span><em>更多&gt;</em>
+    </header>
+    <ul class="content">
+        <li>
+            <div>
+                <img src="../image/pic/yinyue_p1.jpg" />
+            </div>
+            <label>考研英语</label>
+        </li>
+        <li>
+            <div>
+                <img src="../image/pic/yinyue_p1.jpg" />
+            </div>
+            <label>考研英语</label>
+        </li>
+        <li>
+            <div>
+                <img src="../image/pic/yinyue_p1.jpg" />
+            </div>
+            <label>考研英语</label>
+        </li>
+    </ul>
+</section>
+</body>
+<script type="text/javascript" src="../script/api-lite.js"></script>
+<script type="text/javascript" src="../script/zepto.js"></script>
+<script type="text/javascript" src="../script/swipe.js"></script>
+<script type="text/javascript">
+    window.mySwipe = new Swipe(document.getElementById('slide'), {
+        auto: 5000,
+        continuous: true,
+        disableScroll: true,
+        stopPropagation: true,
+        callback: function(index, elem) {
+            var $pointer = $('#slide .pointer');
+            var left = 12.5*index;
+            $pointer.css('left', left+'%');
+        },
+        transitionEnd: function(index, elem) {
+
+        }
+    });
+
+    apiready = function(){
+
+    };
+    function testword(){
+       api.openWin({
+           name: 'testwordpage1',
+           url: './frm_testword.html',
+           pageParam: {
+               name: 'testword'
+           }
+       });
+
+    }
+
+
+      function openWin1(){
+        api.openWin({
+            name: 'tuijian',
+            url: './frm_tuijian1.html',
+            pageParam: {
+                name: 'test'
+            }
+        });
+
+      }
+      function openWiner(){
+        api.openWin({
+            name: 'tuijian',
+            url: './frm_tuijian2.html',
+            pageParam: {
+                name: 'testt'
+            }
+        });
+
+      }
+      function openWinman(){
+        api.openWin({
+            name: 'tuijian',
+            url: './frm_tuijian3.html',
+            pageParam: {
+                name: 'testth'
+            }
+        });
+
+      }
+      function openWinren(){
+        api.openWin({
+            name: 'tuijian',
+            url: './frm_tuijianf.html',
+            pageParam: {
+                name: 'testf'
+            }
+        });
+
+      }
+      function openWinqin(){
+        api.openWin({
+            name: 'tuijian',
+            url: './frm_tuijianfi.html',
+            pageParam: {
+                name: 'testfi'
+            }
+        });
+
+      }
+      function openWinyi(){
+        api.openWin({
+            name: 'tuijian',
+            url: './frm_tuijians.html',
+            pageParam: {
+                name: 'tests'
+            }
+        });
+
+      }
+      function openWinzuo(){
+        api.openWin({
+            name: 'tuijian',
+            url: './frm_tuijianse.html',
+            pageParam: {
+                name: 'testse'
+            }
+        });
+
+      }
+      function openWinzou(){
+        api.openWin({
+            name: 'tuijian',
+            url: './frm_tuijiane.html',
+            pageParam: {
+                name: 'teste'
+            }
+        });
+
+      }
+
+
+
+
+    function openNew(){
+      api.openWin({
+          name: 'page1',
+          url: './frm_bookreadero.html',
+          pageParam: {
+              name: 'test'
+          }
+      });
+
+    }
+    function openNewo(){
+      api.openWin({
+          name: 'page2',
+          url: './frm_bookreadert.html',
+          pageParam: {
+              name: 'test2'
+          }
+      });
+
+    }
+  //   function openNewt(){
+  //     var bookReader = api.require('bookReader');
+  // bookReader.open({
+  //     // filePath: 'widget://res/test.txt'
+  //       filePath: './res/The Old Man and the Sea.txt'
+  // }, function(ret, err) {
+  //     if (ret) {
+  //         alert(JSON.stringify(ret));
+  //     } else {
+  //         alert(JSON.stringify(err));
+  //     }
+  // });
+  //   }
+
+
+    function openNewt(){
+      api.openWin({
+          name: 'page3',
+          url: './win_bookreader1.html',
+          pageParam: {
+              name: 'test3'
+          }
+      });
+
+    }
+    function openlist(){
+      api.openFrame({
+          name: 'page4',
+          url: './frm_radiolist.html',
+          pageParam: {
+              name: 'test4'
+          }
+      });
+
+    }
+
+    function openlistfour(){
+      api.openFrame({
+          name: 'pagefour',
+          url: './frm_openlistfour.html',
+          pageParam: {
+              name: 'testfour'
+          }
+      });
+
+    }
+    function openlistsix(){
+      api.openFrame({
+          name: 'pagesix',
+          url: './frm_openlistsix.html',
+          pageParam: {
+              name: 'testsix'
+          }
+      });
+
+    }
+
+
+    function openw1(){
+      api.openWin({
+          name: 'page5',
+          url: './frm_word1.html',
+          pageParam: {
+              name: 'test5'
+          }
+      });
+
+    }
+    function openw2(){
+      api.openWin({
+          name: 'page6',
+          url: './frm_word2.html',
+          pageParam: {
+              name: 'test6'
+          }
+      });
+
+    }
+    function openw3(){
+      api.openWin({
+          name: 'page7',
+          url: './frm_word3.html',
+          pageParam: {
+              name: 'test7'
+          }
+      });
+
+    }
+    function more(){
+      api.openWin({
+          name: 'page8',
+          url: './win_morebook.html',
+          pageParam: {
+              name: 'test8'
+          }
+      });
+
+    }
+</script>
+</html>

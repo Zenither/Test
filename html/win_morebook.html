@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+  <html>
+  <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+      <title>title</title>
+      <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+      <style>
+          body{
+text-align: center;
+background-color: Lavender;
+font-family: sans-serif;
+font-size: 25px;
+          }
+          section ul div img{
+            text-align: center;
+          }
+      </style>
+  </head>
+  <body>
+<section>
+  <ul>
+    <li>
+      <div onclick="openb()" tapmode=''>
+          <img src="../image/pic/sa.jpg" />
+      </div>
+      <label>The Knights of England, France, and Scotland</label>
+      <hr/>
+    </li>
+    <li>
+      <div onclick="openNew()" tapmode=''>
+          <img src="../image/pic/jj.jpg" />
+      </div>
+      <label>Jane Eyre</label>
+    </li>
+    <li>
+      <div onclick="openc()" tapmode=''>
+          <img src="../image/pic/pi.jpg" />
+      </div>
+      <label>Life of Pi</label>
+    </li>
+    <li>
+      <div onclick="opend()" tapmode=''>
+          <img src="../image/pic/sj.jpg" />
+      </div>
+      <label>Steve Jobs: A Biography</label>
+    </li>
+    <li>
+      <div onclick="opene()" tapmode=''>
+          <img src="../image/pic/ww.jpg" />
+      </div>
+      <label> Sam Walton: Made In America</label>
+    </li>
+    <li>
+      <div onclick="openf()" tapmode=''>
+          <img src="../image/pic/ss.jpg" />
+      </div>
+      <label>Lean In</label>
+    </li>
+  </ul>
+</section>
+  </body>
+  <script type="text/javascript" src="../script/api.js"></script>
+  <script type="text/javascript">
+      apiready = function(){
+
+      };
+      function openb(){
+        api.openWin({
+            name: 'pageb',
+            url: './win_mbook1.html',
+            pageParam: {
+                name: 'testb'
+            }
+        });
+
+      }
+      function openNew(){
+        api.openWin({
+            name: 'page1',
+            url: './frm_book1.html',
+            pageParam: {
+                name: 'test'
+            }
+        });
+
+      }
+      function openc(){
+        api.openWin({
+            name: 'pagec',
+            url: './win_mbook2.html',
+            pageParam: {
+                name: 'testc'
+            }
+        });
+
+      }
+      function opend(){
+        api.openWin({
+            name: 'paged',
+            url: './frm_book1.html',
+            pageParam: {
+                name: 'testd'
+            }
+        });
+
+      }
+      function opene(){
+        api.openWin({
+            name: 'pagee',
+            url: './win_mbook3.html',
+            pageParam: {
+                name: 'teste'
+            }
+        });
+
+      }
+      function openf(){
+        api.openWin({
+            name: 'pagef',
+            url: './win_mbook4.html',
+            pageParam: {
+                name: 'testf'
+            }
+        });
+
+      }
+  </script>
+  </html>

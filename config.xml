@@ -1,10 +1,10 @@
  <widget id="A6078518421068"  version="0.0.1">
     <name>Test</name>
     <description>
-        Example For APICloud.
+      ..
     </description>
-    <author email="developer@apicloud.com" href="http://www.apicloud.com">
-        Developer
+    <author email="3135826538@qq.com" href="http://www.apicloud.com">
+        .....
     </author>
     <content src="index.html" />
     <access origin="*" />

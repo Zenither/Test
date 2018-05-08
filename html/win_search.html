@@ -1,0 +1,252 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <title>Easy英语</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css" />
+	<style>
+		header{
+            height: 56px; line-height: 56px;
+            background-color: #e13430;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: flex;
+        }
+        .inputbox{
+            position: relative;
+            background:url(../image/searchinput.png) no-repeat left center;
+            -webkit-background-size: contain;
+            background-size: contain;
+            -webkit-box-flex: 1;
+            -webkit-flex: 1;
+            flex: 1;
+        }
+        .back{
+            display:inline-block; width: 40px; height: 100%;
+            background:url(../image/search_back.png) no-repeat left center;
+            -webkit-background-size: contain;
+            background-size: contain;
+        }
+        .search{
+            font-size: 14px; color: #fff; display: inline-block;
+            padding: 0 10px;
+        }
+        .inputbox input{
+            background: url(../image/search_zoom.png) no-repeat 7px center;
+            -webkit-background-size: 18px;
+            background-size: 18px;
+            font-size: 14px; outline: none;
+            padding: 10px 30px;
+        }
+        .inputbox .close{
+            position: absolute; right: 0; bottom: 12px;
+            display: inline-block; width: 32px; height: 32px;
+            background: url(../image/search_delete.png) no-repeat;
+            -webkit-background-size: contain;
+            background-size: contain;
+        }
+        #recent{
+            background-color: #eaeaea; overflow: hidden;
+            border-bottom: 1px solid #ddd;
+        }
+        #recent span, #recent em{
+            display: inline-block; padding: 10px 20px;
+            font-size: 12px; color: #565656;
+        }
+        #recent em{
+            float: right;
+        }
+        #recent em:before{
+            display: inline-block; content: '';
+            margin-right: 4px;
+            width: 16px; height: 16px; vertical-align: bottom;
+            background: url(../image/search_trash.png) no-repeat;
+            -webkit-background-size: contain;
+            background-size: contain;
+        }
+
+
+
+
+        #list{
+            border: 1px solid #bbb;
+            border-top: none;
+            box-shadow: 1px 1px 2px #999;
+        }
+        #list li{
+            height: 30px;
+            line-height: 30px;
+            text-indent: 10px;
+        }
+        #list li a{
+            display: block;
+            height: 100%;
+            text-decoration: none;
+            color: #333;
+            font-size: 14px;
+            cursor: default;
+        }
+        #list li a:hover,#list li a.active{
+            background: #ddd;
+        }
+	</style>
+</head>
+<body>
+    <header>
+        <i class="back" tapmode onclick="api.closeWin()"></i>
+        <div class="inputbox" id='box'>
+            <input  id="inp" type="text" placeholder="查询单词" />
+            <i class="close" tapmode onclick="del()"></i>
+            <ul id="list">
+
+            </ul>
+        </div>
+        <span class="search" onclick="ss()">搜索</span>
+    </header>
+    <div id="recent">
+        <span>最近搜索</span><em>清除全部</em>
+    </div>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript">
+    function del(){
+        var input = document.querySelector('.inputbox input');
+        input.value = '';
+    }
+    apiready = function(){
+		var header = document.querySelector('header');
+        $api.fixIos7Bar(header);
+
+        var recent = document.querySelector('#recent');
+        var headerPos = $api.offset(recent);
+        api.openFrame({
+            name: 'frm_search_res',
+            url: 'frm_search_res.html',
+            rect: {
+                x: 0,
+                y: headerPos.t + headerPos.h,
+                w: 'auto',
+                h: 'auto'
+            }
+        });
+    };
+
+
+
+
+                var oInp = document.getElementById("inp"),
+                    oList = document.getElementById("list");
+
+                //事件，当input表单内容发生的改变的时候触发
+                oInp.oninput = eFn;
+                oInp.onfocus = function (ev) {
+                    eFn.call(this);
+                    this.sVal = this.value;
+                    this.index = 0;
+                };
+                oInp.onblur = function () {
+                    setTimeout(function () {
+                        oList.innerHTML = "";
+                    },200);
+                };
+                oInp.onkeyup = function (ev) {
+                    ev = ev || window.event;
+                    var keyCode = ev.keyCode;
+                    var val = this.value;
+                    if ( val ){
+
+                        if ( keyCode !== 40 && keyCode !== 38 ){
+                            this.sVal = val;
+                            this.index = 0;
+                        }
+                        if ( keyCode === 13 ){
+                            window.location.href = "https://www.baidu.com/s?wd="+val;
+                            this.blur();
+                        }else if ( keyCode === 38 || keyCode === 40 ){
+                            UpOrDown.call(this,keyCode);
+                            ev.preventDefault && ev.preventDefault();
+                            return false;
+                        }
+                    }
+                };
+
+                //上下按键的事件处理
+                function UpOrDown(keyCode){
+                    var aLi = oList.children;
+                    var length = aLi.length;
+
+                    for (var i = 0; i < length; i++) {
+                        aLi[i].children[0].className = "";
+                    }
+
+                    if ( keyCode === 38 ){
+                        this.index --;
+                        if(this.index<0)this.index=length;
+                    }else{
+                        this.index ++;
+                        this.index %= length+1;
+                    }
+                    if ( this.index ){
+                        this.value = aLi[this.index-1].children[0].innerHTML;
+                        aLi[this.index-1].children[0].className = "active";
+                    }else{
+                        this.value = this.sVal;
+                    }
+                }
+
+
+                //请求jsonp的事件函数
+                function eFn() {
+                    var val = this.value;
+
+                    if ( val ){
+                        //要加载这一段js，也就是要创建一个script标签！！
+                        //https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd= &cb=gd
+
+                        //清除前一个
+                        var dom = document.getElementById("PAOPAO_JSONP");
+                        if ( dom )document.body.removeChild(dom);
+
+                        //再创建当前的
+                        var oS = document.createElement("script");
+                        oS.id = "PAOPAO_JSONP";
+                        oS.src = "https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd="+val+"&cb=paopao";
+                        document.body.appendChild(oS);
+
+                    }else{
+                        oList.innerHTML = "";
+                    }
+                }
+
+                //接收处理的函数
+                function paopao( msg ) {
+                    //清理ul内容
+                    oList.innerHTML = "";
+                    //获取jsonp传参里面的数据
+                    var data = msg.s;
+                    //遍历生成LI，并放入UL
+                    for (var i = 0,length=data.length; i < length; i++) {
+                        var wd = data[i];
+                        var oLi = document.createElement("li");
+                        oLi.innerHTML = "<a target='_blank' href='https://www.baidu.com/s?wd="+wd+"'>"+wd+"</a>";
+
+                        //实现点击联想词之后输入框内容的改变
+                        oLi.onclick = function () {
+                            oInp.value = this.children[0].innerHTML;
+                        };
+                        oList.appendChild( oLi );
+                    }
+                }
+
+          function ss(){
+            api.openWin({
+                name: 'win_search',
+                url: 'html/win_new.html',
+                animation: {
+                    type: 'fade'
+                }
+            });
+          }
+</script>
+</html>

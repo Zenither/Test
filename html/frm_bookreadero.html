@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+  <html>
+  <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+      <title>title</title>
+      <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+      <style>
+          body{
+
+          }
+      </style>
+  </head>
+  <body>
+
+  </body>
+  <script type="text/javascript" src="../script/api.js"></script>
+  <script type="text/javascript">
+      apiready = function(){
+
+
+
+
+        var bookReader= api.require("bookReader");
+        var filePath = "widget://res/frm_bookreadero.html";
+
+        bookReader.getProgress({
+            // filePath: 'widget://README.md'
+            filePath: filePath
+        }, function(ret, err){
+            if( ! ret.status || !ret.progress ){
+              showBookReader(0);
+              return ;
+      }
+
+              var progress = ret.progress;
+              api.confirm({
+                  title: '阅读提示',
+                  msg: '从上次阅读位置继续阅读？',
+                  buttons: ['确定', '取消']
+              }, function(ret, err){
+                  if( 1== ret.buttonIndex ){
+                    showBookReader(0);
+                  }else{
+                      showBookReader(progress);
+                  }
+              });
+
+
+
+        });
+
+         function showBookReader(progress){
+           bookReader.open({
+             x: 0,
+             y: 0,
+             progress: progress,
+             w: api.frameWidth,
+             h: api.frameHeight,
+             bg: '#FFFFF0',
+             filePath: filePath,
+
+             textStyle: {
+               size:16,
+               color:'#ff0000'},
+               fixedOn:api.frameName
+           }, function(ret, err){
+               if( ! ret ){
+                  return;
+               }
+               var eventType = ret.eventType;
+               var progress = ret.progress;
+
+               if("page_over"==eventType){
+                 api.toast({
+                     msg: '已经是最后一页了',
+                     duration: 2000,
+                     location: 'bottom'
+                 });
+
+               }
+
+               if("page_begin"==eventType){
+                 api.toast({
+                     msg: '已经是第一页了',
+                     duration: 2000,
+                     location: 'bottom'
+                 });
+
+               }
+               if("page_up" == eventType || "page_down === eventType"){
+                //  nothing to do
+               }
+           });
+
+         };
+
+
+
+
+      };
+
+  </script>
+  </html>
