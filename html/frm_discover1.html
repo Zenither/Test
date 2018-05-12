@@ -146,7 +146,7 @@
 </section>
 <section>
     <header>
-        <span>听力</span><em>更多&gt;</em>
+        <span>听力</span><em onclick="everyword()">更多&gt;</em>
     </header>
     <!-- <ul class="content" onclick="openlist()" tapmode=""> -->
       <ul class="content" >
@@ -386,6 +386,18 @@
 
       }
 
+      function everyword(){
+        api.openWin({
+            name: 'everyword',
+            url: './frm_everyword.html',
+            pageParam: {
+                name: 'word'
+            }
+        });
+
+      }
+
+
 
 
 
@@ -437,7 +449,7 @@
     function openlist(){
       api.openFrame({
           name: 'page4',
-          url: './frm_radiolist.html',
+          url: './frm_voa.html',
           pageParam: {
               name: 'test4'
           }
